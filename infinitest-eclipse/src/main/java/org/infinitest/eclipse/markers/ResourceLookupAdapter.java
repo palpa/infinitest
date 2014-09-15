@@ -56,7 +56,11 @@ public class ResourceLookupAdapter implements ResourceLookup {
 	}
 
 	private static String sourceFilename(String className) {
-		return className.replace(".", "/") + ".java";
+		return removeInnerClasses(className).replace(".", "/") + ".java";
+	}
+
+	private static String removeInnerClasses(String className) {
+		return className.split("\\$")[0];
 	}
 
 	@Override
