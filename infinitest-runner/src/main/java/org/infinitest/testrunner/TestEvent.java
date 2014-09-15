@@ -108,12 +108,16 @@ public class TestEvent implements Serializable {
 		return name + "." + method;
 	}
 
+	private String removeInnerClassesFromClassName(String className) {
+		return className.split("\\$")[0];
+	}
+
 	private String getPointOfFailureClass() {
 		if (stackTrace.length == 0) // Temporary fix
 		{
 			return fullErrorClassName;
 		}
-		return getPointOfFailureElement().getClassName();
+		return removeInnerClassesFromClassName(getPointOfFailureElement().getClassName());
 	}
 
 	private int getPointOfFailureLineNumber() {
